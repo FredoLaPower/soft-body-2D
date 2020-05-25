@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GameObjects/Jeelo/Jeelo.gd" type="Script" id=1]
+[ext_resource path="res://GameObjects/Jeelo/Jeelo.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0
+
+[node name="Jeelo" type="RigidBody2D"]
+script = ExtResource( 1 )
+BODY_RADIUS = 48
+CORE_RADIUS = 16
+MAX_POINTS = 8
+REST_LENGTH = 1
+STIFFNESS = 32
+DAMPING = 1.0
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Points" type="Node2D" parent="."]
+
+[node name="Joints" type="Node2D" parent="."]
+visible = false
+
+[node name="Springs" type="Node2D" parent="."]
+visible = false
+
+[node name="PolyShape" type="Polygon2D" parent="."]
+visible = false
+texture = ExtResource( 2 )
+texture_offset = Vector2( 64, 64 )
+polygon = PoolVector2Array( 2.93915e-15, -48, 45.6507, -14.8328, 28.2137, 38.8328, -28.2137, 38.8328, -45.6507, -14.8328, -8.81746e-15, -48 )
+uv = PoolVector2Array( 2.93915e-15, -48, 45.6507, -14.8328, 28.2137, 38.8328, -28.2137, 38.8328, -45.6507, -14.8328, -8.81746e-15, -48 )

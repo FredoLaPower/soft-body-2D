@@ -1,0 +1,10 @@
+[gd_resource type="AudioBusLayout" load_steps=2 format=2]
+
+[sub_resource type="AudioEffectEQ21" id=1]
+resource_name = "EQ21"
+band_db/700_hz = 18.0
+band_db/1000_hz = 4.36364
+
+[resource]
+bus/0/effect/0/effect = SubResource( 1 )
+bus/0/effect/0/enabled = true

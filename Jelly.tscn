@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://GameObjects/Jeelo/Jeelo.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Scene" type="Node2D"]
+
+[node name="Jeelo" parent="." instance=ExtResource( 2 )]
+position = Vector2( 346.665, 275.22 )
+MAX_POINTS = 4
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+scale = Vector2( 0.851182, 0.933962 )
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+modulate = Color( 0.298039, 0.545098, 0.282353, 1 )
+position = Vector2( 79.0249, -23.023 )
+polygon = PoolVector2Array( 1021.27, 488.011, 878.582, 600.752, 625.795, 528.527, 377.707, 600.165, 167.492, 534.986, 70.5939, 572.078, 18.7671, 428.176, 22.6266, 248.987, 120.215, 106.188, 168.183, 90.7502, 152.745, 25.691, 4.9834, 127.691, -74.9622, 307.43, -77.7189, 567.116, 56.2589, 668.564, 1059.16, 661.396, 1118.16, 470.078, 1124.5, 347.679, 1120.36, 283.171, 1069.09, 219.766, 965.985, 196.609, 849.099, 188.339, 772.461, 214.804, 750.958, 257.258, 791.758, 282.068, 834.212, 261.117, 945.585, 262.771, 1001.82, 301.917, 1024.98, 355.949 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2( 79.0248, -24.794 )
+polygon = PoolVector2Array( 879.648, 601.856, 1018.91, 489.103, 1025.39, 355.687, 998.833, 301.377, 945.07, 263.005, 834.306, 261.824, 793.498, 281.896, 750.747, 259.463, 774.713, 215.188, 851.795, 188.033, 959.969, 196.888, 1068.14, 219.911, 1116.72, 278.944, 1125.14, 348.603, 1118.67, 470.212, 1059.07, 660.299, 53.1256, 669.154, -81.6054, 565.256, -79.0145, 303.738, 4.54465, 125.457, 156.117, 25.691, 168.424, 85.905, 118.548, 108.928, 22.6815, 251.198, 18.1473, 429.479, 67.3759, 571.159, 169.72, 535.739, 382.18, 603.627, 628.323, 529.836 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( 567.401, 346.506 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2( 0, 10 )
+shape = SubResource( 1 )

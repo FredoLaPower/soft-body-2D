@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GameObjects/Jaylo/Jaylo.gd" type="Script" id=1]
+[ext_resource path="res://GameObjects/Jaylo/Jaylo.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0
+
+[node name="Jaylo" type="RigidBody2D"]
+script = ExtResource( 1 )
+BODY_RADIUS = 48
+CORE_RADIUS = 16
+STIFFNESS = 32
+DAMPING = 1.0
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Points" type="Node2D" parent="."]
+
+[node name="Joints" type="Node2D" parent="."]
+
+[node name="Springs" type="Node2D" parent="."]
+
+[node name="PolyShape" type="Polygon2D" parent="."]
+texture = ExtResource( 2 )
+texture_offset = Vector2( 64, 64 )
+polygon = PoolVector2Array( 3.49997e-15, -57.1588, 21.4121, -52.9967, 40.4174, -40.4174, 52.615, -22.3337, 57.1588, 0, 52.9967, 21.4121, 40.4174, 40.4174, 22.3337, 52.615, 3.49997e-15, 57.1588, -21.4121, 52.9967, -40.4174, 40.4174, -52.615, 22.3337, -57.1588, 6.99994e-15, -52.9967, -21.4121, -40.4174, -40.4174, -22.3337, -52.615 )
+uv = PoolVector2Array( 3.49997e-15, -57.1588, 21.4121, -52.9967, 40.4174, -40.4174, 52.615, -22.3337, 57.1588, 0, 52.9967, 21.4121, 40.4174, 40.4174, 22.3337, 52.615, 3.49997e-15, 57.1588, -21.4121, 52.9967, -40.4174, 40.4174, -52.615, 22.3337, -57.1588, 6.99994e-15, -52.9967, -21.4121, -40.4174, -40.4174, -22.3337, -52.615 )
