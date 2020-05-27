@@ -46,54 +46,55 @@ func _draw() -> void:
 	for i in range(MAX_POINTS):
 		draw_line(points[i], points[i + 1], Color(255, 0, 0, 255))
 		
-#	for body in $Points.get_children():
-#		draw_circle(body.position, 10, Color(255, 0, 0, 100))
+	for body in $Points.get_children():
+		draw_circle(body.position, 5, Color(255, 0, 0, 100))
 
 
 func _initialize() -> void:
 	var points: PoolVector2Array = PoolVector2Array()
-	var angle: float = 0.0
-	var length: float = 0.0
+	
+	for i in range(MAX_POINTS + 1):
+		points.push_back(Vector2(BODY_RADIUS, 0).rotated(deg2rad(i * 360 / MAX_POINTS)))
 	
 	for i in range(MAX_POINTS):
-		angle = deg2rad(i * 360 / MAX_POINTS)
-		length = (Vector2.RIGHT * BODY_RADIUS).distance_to((Vector2.RIGHT * BODY_RADIUS).rotated(angle))
-		
-		_add_point(i, angle, length)
-		points.push_back(Vector2(BODY_RADIUS, 0).rotated(angle))
+		_add_point(i, points[i], points[i + 1])
+		_add_joint(i, points[i])
+		_add_spring(i, points[i], points[i + 1])
 
-
-func _add_point(index: int, angle: float, length: float) -> void:
+func _add_point(index: int, a: Vector2, b:Vector2) -> void:
 	var point = RigidBody2D.new()
 	var collider = CollisionShape2D.new()
-	var shape = RectangleShape2D.new()
+	var shape = CapsuleShape2D.new()
+	
+	var label = Label.new()
+	label.text = "Point" + str(index + 1)
+	point.add_child(label)
 	
 	# Setting Shape2D 
-	shape.extents = Vector2(length, 5)
+	shape.radius = 5
+	shape.height = a.distance_to(b)
 	
 #	# Setting CollisionShape2D
 	collider.set_name("Collider")
-	collider.position = Vector2(0, -5)
 	collider.shape = shape
+	collider.rotation = PI / 2
 	point.add_child(collider)
 	
 	# Setting RigidBody2D
 	point.set_name("Point" + str(index + 1))
-	point.rotation = PI/2
+	point.rotation = Vector2.RIGHT.angle_to(b - a)
+	point.position = (a + b) / 2
 
 	# Attaching nodes
 	$Points.add_child(point)
-	
-	print(collider.global_position)
 
 
 # warning-ignore:unused_argument
-func _add_joint(index: int, from: Vector2, to: Vector2) -> void:
+func _add_joint(index: int, pos: Vector2) -> void:
 	var joint = PinJoint2D.new()
 	
 	joint.set_name("Joint" + str(index + 1))
-	joint.position = from
-	joint.rotation = Vector2.RIGHT.angle_to(joint.position)
+	joint.position = pos
 	joint.node_a = "../../Points/Point" + str(index + 1)
 	
 	if index < MAX_POINTS - 1:
@@ -101,19 +102,23 @@ func _add_joint(index: int, from: Vector2, to: Vector2) -> void:
 	else:
 		joint.node_b = "../../Points/Point1"
 	
+#	var label = Label.new()
+#	label.text = "J%s%s" % [get_node(joint.node_a).get_name(), get_node(joint.node_b).get_name()]
+#	joint.add_child(label)
+	
+	
 	$Joints.add_child(joint)
 
 
-func _add_spring(index: int, to: Vector2) -> void:
+func _add_spring(index: int, a: Vector2, b: Vector2) -> void:
 	var joint = DampedSpringJoint2D.new()
 	
 	joint.set_name("Spring" + str(index + 1))
-	joint.length = to.length()
+	joint.length = Vector2.ZERO.distance_to((a + b) / 2)
 	joint.rest_length = REST_LENGTH
 	joint.stiffness = STIFFNESS
 	joint.damping = DAMPING
-	joint.position = Vector2.ZERO
-	joint.rotation = Vector2.RIGHT.angle_to(to) - PI/2
+	joint.rotation = Vector2.RIGHT.angle_to(b - a)
 	joint.node_a = "../.."
 	joint.node_b = "../../Points/Point" + str(index + 1)
 	

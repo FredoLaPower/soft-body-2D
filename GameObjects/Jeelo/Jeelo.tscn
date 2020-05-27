@@ -10,7 +10,7 @@ radius = 16.0
 script = ExtResource( 1 )
 BODY_RADIUS = 48
 CORE_RADIUS = 16
-MAX_POINTS = 8
+MAX_POINTS = 6
 REST_LENGTH = 1
 STIFFNESS = 32
 DAMPING = 1.0
@@ -21,10 +21,8 @@ shape = SubResource( 1 )
 [node name="Points" type="Node2D" parent="."]
 
 [node name="Joints" type="Node2D" parent="."]
-visible = false
 
 [node name="Springs" type="Node2D" parent="."]
-visible = false
 
 [node name="PolyShape" type="Polygon2D" parent="."]
 visible = false

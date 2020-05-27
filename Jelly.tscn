@@ -2,13 +2,12 @@
 
 [ext_resource path="res://GameObjects/Jeelo/Jeelo.tscn" type="PackedScene" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=1]
 
 [node name="Scene" type="Node2D"]
 
 [node name="Jeelo" parent="." instance=ExtResource( 2 )]
 position = Vector2( 346.665, 275.22 )
-MAX_POINTS = 4
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 scale = Vector2( 0.851182, 0.933962 )
